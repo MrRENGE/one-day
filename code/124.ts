@@ -24,13 +24,13 @@
 
 // }
 
-type TreeNode  = {
+type TreeNode = {
   val: number
   left: TreeNode | null
   right: TreeNode | null
 }
 
-
+// 124
 function maxPathSum(root: TreeNode | null): number {
   let result = Number.MIN_SAFE_INTEGER;
 
@@ -38,11 +38,11 @@ function maxPathSum(root: TreeNode | null): number {
     if (root === null) {
       return 0
     }
-    let left: number  = Math.max(0, oneSideMax(root.left));
+    let left: number = Math.max(0, oneSideMax(root.left));
     let right: number = Math.max(0, oneSideMax(root.right));
-  
+
     result = Math.max(result, left + right + root.val);
-  
+
     return Math.max(left, right) + root.val;
   }
 
@@ -53,8 +53,6 @@ function maxPathSum(root: TreeNode | null): number {
 };
 
 /* 解题思路:
-  寻找二叉树中最大的路径和，那就是寻找到左边最大、右边最大，再加上当前节点的值。
-
-
+  寻找二叉树中最大的路径和，那就是寻找到左边最大、右边最大，再加上当前节点的值。 思考模型：树的后根序遍历。
 */
 
