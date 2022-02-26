@@ -101,3 +101,16 @@ for ( let key in obj11 ) {
 // aa 234
 
 
+let aa = {
+  foo: 'foo'
+};
+
+
+let bb = Object.create(aa);
+
+console.log(bb.foo);
+
+bb.foo = '123';
+
+console.log(bb.foo);
+console.log(aa.foo);
