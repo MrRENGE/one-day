@@ -10,12 +10,3 @@ function fib(n) {
     }
     return dp(n);
 }
-
-
-console.log(fib(0))
-console.log(fib(1))
-console.log(fib(2));
-console.log(fib(8))
-console.log(fib(45))
-
-
