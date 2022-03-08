@@ -3,3 +3,8 @@ export type TreeNode = {
   left: TreeNode | null
   right: TreeNode | null
 }
+
+export  type ListNode = {
+  val: number,
+  next: ListNode | null
+}
