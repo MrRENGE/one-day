@@ -1,4 +1,4 @@
-function longestPalindromeSubseq(s: string): number {
+function minMovesToMakePalindrome(s: string): number {
   let dp:number[][] = [];
   dp.length = s.length;
 
@@ -9,16 +9,15 @@ function longestPalindromeSubseq(s: string): number {
     temp.fill(0);
     dp[i] = temp;
     // 每个字符，回文串最小是自己本身
-    dp[i][i] = 1;
   } 
 
 
   for (let i = s.length-2; i>=0; i--) {
     for (let j = i + 1; j < s.length; j++) {
       if (s.charAt(i) === s.charAt(j)) {
-        dp[i][j] = dp[i-1][j-1] + 2;
+        dp[i][j] = dp[i-1][j-1];
       } else {
-        dp[i][j] = Math.max(dp[i+1][j], dp[i][j-1])
+        dp[i][j] = Math.max(dp[i+1][j], dp[i][j-1]) + 1
       }
     }
   }
