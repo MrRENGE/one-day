@@ -28,6 +28,14 @@
   }
 
   if (root.val === key) {
+
+    // 如果只存在一边
+    // 左子树有内容则返回左子树
+    // 右子树有内容则返回右子树
+    if (root.left===null) return root.right;
+    if (root.right===null) return root.left;
+
+    // 两边都存在则，需要找到比左子树大，比 根节点小的一个值作为根节点。 遍历右子树中的最小值【最左边】
     // 将右子树最小的和 root 进行交换，然后删除最后一个节点
 
     let node = getMinNode(root.right);
