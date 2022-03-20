@@ -10,7 +10,6 @@ function subsets(nums: number[]): number[][] {
       track.push(nums[i]);
 
       // 递归,进入下一决策
-
       backtrack([...track], i+1, nums);
 
       // 撤销选择
