@@ -17,6 +17,81 @@ class MyPromise {
     }
   }
 
+  /**
+   * 
+   * @param {*} value 如果是 promise 则直接返回， 如果是带 then 函数的对象，则使用then的值作为 promise 决议值，
+   * 其他值类型则 value 作为 promise的值处理
+   * @return {*} promise resolve
+   */
+  static resolve(value) {
+    if (value instanceof MyPromise) {
+      return value;
+    }
+    if (value !== null && typeof value === 'object') {
+      if (typeof value.then === 'function') {
+        return new MyPromise((resolve, reject) => {
+          value.then(resolve, reject);
+        });
+      }
+    }
+
+    return new MyPromise((resolve, reject) => {
+      resolve(value);
+    })
+  };
+
+
+  static reject(reason) {
+    return new MyPromise((resolve, reject) => {
+      reject(reason);
+    })
+  }
+
+
+
+  static all(promises) {
+    function hasIterator(target) {
+      return target instanceof Array || target instanceof Map || target instanceof Set;
+    }
+
+    const result = [];
+    let count = 0;
+
+    return new Promise((resolve, reject) => {
+
+      if (!promises.length) {
+        resolve([]);
+      }
+
+      if (hasIterator(promises)) {
+        promises.forEach((option) => {
+          if (option instanceof Promise || (typeof option === 'object' && 'then' in option)) {
+            MyPromise.resolve(option).then((data) => {
+              count++;
+              result.push(data);
+              // 最后一个完成 resolve
+              if (count === promises.length) {
+                resolve(result);
+              }
+            }, (reason) => {
+              reject(reason);
+            })
+          } else {
+            // 处理普通数据
+            result.push(option);
+            count++;
+            if (count === promises.length) {
+              resolve(result);
+            }
+          }
+        });
+      } else {
+        reject(TypeError('arguments type is not iterator!'));
+      }
+    });
+  }
+
+
   resolve(result) {
     if (this.promiseState === MyPromise.PENDING) {
 
@@ -96,6 +171,24 @@ class MyPromise {
     return promise2;
   }
 
+  // 实际是就是 then(, onRejected) 的用法
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
+  }
+
+  /**
+   * 不管 promise 决议后是 fulfilled 还是 rejected 都需要执行的回调，
+   * 避免在 then 和 catch 的回调中重复写代码
+   * @param {*} callback 
+   * @returns 
+   */
+  finally(callback) {
+    // 实际就是额外注册一次 then , 因为针对同一个 promise 决议后无论多少次调用 then 或者 catch 访问到的内容都是不变的。
+    // 因此将 callback （通用的部分，比如埋点统计） 直接传递给 then 的两个参数可以避免重复写代码
+    return this.then(callback, callback);
+  }
+
+
 }
 
 // then 里面注册的 onRejected 、 onFulfilled  函数进行决议 。 
@@ -134,7 +227,7 @@ function resolvePromise(promise2, x, resolve, reject) {
     if (typeof then === 'function') {
       let called = false;
       try {
-        then.call( 
+        then.call(
           x,
           y => {
             if (called) return;
