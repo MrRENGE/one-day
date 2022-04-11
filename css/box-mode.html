@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      padding: 10px;
+      background-color: aqua;
+    }
+    .box img {
+      float: left;
+    }
+
+    .box::after {
+      content: '';
+      clear: both;
+      display: block;
+      padding: 30px;
+      background-color: blue;
+    }
+
+    .inline-box {
+      display: inline-block;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: aquamarine;
+    }
+
+    .width-auto-box {
+      margin-top: 10px;
+      width: auto;
+      background-color: aliceblue;
+    }
+
+    .width-auto-box p {
+      width: auto;
+      background-color: red;
+      /* display: inline-block; */
+    }
+
+    .positon-box {
+      height: 200px;
+      width: 400px;
+      position: relative;
+      background-color: aquamarine;
+    }
+
+    .positon-box div {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      height: 200px;
+      background-color: beige;
+    }
+
+    .content-center {
+      text-align: center;
+      width: 10em;
+      padding: 2px;
+      background-color: beige;
+      margin-top: 10px;
+    }
+    .content-center p {
+      display: inline-block;
+      text-align: left;
+    }
+
+    .ao {
+      display: inline-block;
+      width: 0;
+      margin-top: 10px;
+    }
+
+    .ao::before {
+      content: "love你love";
+      outline: 2px solid rgb(173, 96, 96);
+      color: #fff;
+    }
+
+    .to {
+      display: inline-block;
+      width: 0;
+      margin-left: 4em;
+    }
+
+    .ao::before {
+      content: "你love你ded，deeee，ddddd";
+      text-align: left;
+      outline: 2px solid rgb(173, 96, 96);
+      color: #fff;
+    }
+
+    .to::after {
+      content: "你love你ded，deeee，ddddd";
+      text-align: right;
+      outline: 2px solid rgb(173, 96, 96);
+      color: #fff;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="box">
+    after 清除浮动子元素
+    <div>
+      <img src="https://demo.cssworld.cn/images/common/l/1.jpg"/>
+      <p>234</p>
+    </div>
+  </div>
+
+  <div class="inline-box">
+    <img src="https://demo.cssworld.cn/images/common/l/1.jpg"/>
+    <p>245678765432</p>
+  </div>
+
+  <div class="width-auto-box">
+    宽度超过了！
+    <p>
+      1234567876rewregsdfghjythgrfdsdfghjytgrfdghtjytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhytrdfghjyhtgfcgvbhjnujybhtgvfcgvbhyjnujnbhgvfcdxfgvhbjnukimkjnbhgvfcgvhbyjn
+    </p>
+  </div>
+
+  <div class="positon-box">
+    <div>
+      内部容器自适应外层高宽度【position】
+    </div>
+  </div>
+
+  <div class="content-center">
+    <p>文字较少</p>
+    <p>文字较多，需要换行显示。文字多时左对齐。lalala</p>
+  </div>
+
+
+  <div class="ao"></div>
+  <div class="to"></div>
+</body>
+</html>

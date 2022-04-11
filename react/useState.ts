@@ -1,4 +1,4 @@
-let workInProgressHook;
+let workInProgressHook; // 指向当前执行的 hook
 let isMount = true;
 
 const fiber = {
@@ -26,6 +26,7 @@ function dispatchAction(queue, action) {
   }
   queue.pending = update;
 
+  // Fiber 调度render节点
   schedule();
 }
 
