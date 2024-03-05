@@ -33,6 +33,10 @@
 
   }
 
+ if (root === null) {
+   return { val, left: null, right: null } as TreeNode;
+ }
+
   dp(root, val);
 
   return root;
